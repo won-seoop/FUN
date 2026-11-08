@@ -1,0 +1,15 @@
+services:
+  api:
+    build: .
+    container_name: space-telescope
+    ports:
+      - "8000:8000"
+    environment:
+      DEVICE_MODE: sim                    # sim | alpaca
+      ALPACA_HOST: host.docker.internal   # 호스트 PC에서 실행 중인 Sky Simulator
+      ALPACA_PORT: "32323"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
